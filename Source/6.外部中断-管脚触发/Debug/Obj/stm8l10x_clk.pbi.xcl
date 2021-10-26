@@ -1,18 +1,22 @@
-"E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\src\stm8l10x_clk.c"
+"E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\src\stm8l10x_clk.c"
 -std=c99
 -ferror-limit=0
 -I
-E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发
+E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发
 -I
-E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\inc
+E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\inc
+-I
+E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\inc
 -I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\inc
 -I
 D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\inc\c
 -I
-E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发
+E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发
 -I
-E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\inc
+E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\inc
+-I
+E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\STM8L10x_StdPeriph_Driver\inc
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

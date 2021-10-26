@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\settings\Demo.Debug.general.xcl" --backend -f "E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\settings\Demo.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\settings\Demo.Debug.general.xcl" --backend -f "E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\settings\Demo.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\settings\Demo.Debug.general.xcl" "--debug_file=%~1" --backend -f "E:\Product\Better_Service\Document\00_参考资料\STM8L101F3-蓝旗嵌入式\例程---不断添加中\库例程35个\6.外部中断-管脚触发\settings\Demo.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\common\bin\cspybat" -f "E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\settings\Demo.Debug.general.xcl" "--debug_file=%~1" --backend -f "E:\GitHub\Drinking_water\Source\6.外部中断-管脚触发\settings\Demo.Debug.driver.xcl" 
 
 @echo off 
 :end

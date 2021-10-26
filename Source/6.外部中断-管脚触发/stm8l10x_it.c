@@ -27,7 +27,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm8l10x_it.h"
-uint8_t i;
+#include "com_event.h"
+#include "com_state.h"
+uint32_t i;
 /** @addtogroup STM8L10x_StdPeriph_Templates
   * @{
   */
@@ -282,11 +284,13 @@ INTERRUPT_HANDLER(TIM4_UPD_OVF_IRQHandler, 25)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
-  i++;
-    if(i==61)
+    i++;
+    if(i==3661)
     {
 	GPIO_ToggleBits(GPIOA, GPIO_Pin_6);//·­×ªGPA6Êä³ö×´Ì¬
 	i=0;
+	
+	System_Add_EventFifo(SYSTEM_EVENT_TIME_OUT);
     }
     TIM4_ClearITPendingBit(TIM4_IT_Update);
 }

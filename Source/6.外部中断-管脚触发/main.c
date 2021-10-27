@@ -10,6 +10,12 @@
 #define LED_GPIO_PINS  GPIO_Pin_0
 #define KEY_GPIO_PORT  GPIOB
 #define KEY_GPIO_PINS  GPIO_Pin_1
+
+#define KEY_TIME_DES_GPIO_PORT  GPIOA
+#define KEY_TIME_DES_GPIO_PIN  GPIO_Pin_2
+
+#define KEY_TIME_ADD_GPIO_PORT  GPIOC
+#define KEY_TIME_ADD_GPIO_PIN   GPIO_Pin_2
 //以下需要添加
 #define PUTCHAR_PROTOTYPE int putchar (int c)
 #define GETCHAR_PROTOTYPE int getchar (void)
@@ -44,6 +50,8 @@ void Delay(__IO uint16_t nCount)
 *******************************************************************************/
 void main(void)
 {
+	CLK_MasterPrescalerConfig(CLK_MasterPrescaler_HSIDiv1);
+	delay_init(16/CLK->CKDIVR);
 	
 	CLK_PeripheralClockConfig (CLK_Peripheral_USART,ENABLE); //使能外设时钟
 	//以下2句为设置USART的TXD、RXD所在I/O口，板子上有CH340，已经带了硬件上拉，不设置也可以，如果不带CH340则应该设置
@@ -56,9 +64,12 @@ void main(void)
 	//KEY
     GPIO_Init(LED_GPIO_PORT, LED_GPIO_PINS, GPIO_Mode_Out_PP_Low_Slow);//初始化LED，GPD0低速推挽输出
     GPIO_Init(KEY_GPIO_PORT, KEY_GPIO_PINS, GPIO_Mode_In_PU_IT);//初始化按键，GPB1上拉输入
-    GPIO_Init(GPIOC, GPIO_Pin_1, GPIO_Mode_In_PU_IT);//初始化按键，GPB1上拉输入
+	GPIO_Init(KEY_TIME_DES_GPIO_PORT, KEY_TIME_DES_GPIO_PIN, GPIO_Mode_In_PU_IT);//初始化按键，GPB1上拉输入
+    GPIO_Init(KEY_TIME_ADD_GPIO_PORT, KEY_TIME_ADD_GPIO_PIN, GPIO_Mode_In_PU_IT);//初始化按键，GPB1上拉输入
+
     EXTI_DeInit (); //恢复中断的所有设置 
     EXTI_SetPinSensitivity (EXTI_Pin_1,EXTI_Trigger_Falling);//外部中断1，下降沿触发，中断向量号9
+	EXTI_SetPinSensitivity (EXTI_Pin_2,EXTI_Trigger_Rising);//外部中断2，下降沿触发，中断向量号10
     //Time4 
 	CLK_PeripheralClockConfig (CLK_Peripheral_TIM4,ENABLE); //使能外设时钟，STM8L外设时钟默认关闭，使用前需使能
 	TIM4_DeInit();

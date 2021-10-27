@@ -17,16 +17,20 @@ void System_do_Down(void);
 void time_out(void);
 void System_set_Event(SYSTEM_EVENT event);
 uint16_t System_time;
-SYSTEM_EVENT System_Event;
+SYSTEM_EVENT System_Event = SYSTEM_EVENT_NULL;
 FSM_t        System_fsm_t;
+u16	user_timing = 0;
 FsmTable_t   s_System_FsmTable_t[]=
 {
 	/* event */			      /* CurState */        	/* (*eventActFun) */ 				/* NextState */
 	{SYSTEM_EVENT_NULL,      	SYSTEM_STATE_IDEL,     	System_Check_EVENT_Fifo,       		SYSTEM_STATE_IDEL   },
 	{SYSTEM_EVENT_CUP_WEIGHT,   SYSTEM_STATE_IDEL,     	get_cup_weight,      	    			SYSTEM_STATE_IDEL   },
 	{SYSTEM_EVENT_TIME_OUT,  	SYSTEM_STATE_IDEL,     	time_out,      				SYSTEM_STATE_IDEL 	},
+	{SYSTEM_EVENT_REQ_UP,  		SYSTEM_STATE_IDEL,     	time_out,      				SYSTEM_STATE_IDEL 	},
+	{SYSTEM_EVENT_REQ_DOWN,  	SYSTEM_STATE_IDEL,     	time_out,      				SYSTEM_STATE_IDEL 	},
 	
 };
+s32 last_weight = 0;
 void get_cup_weight()
 {
 	Get_Maopi();//称毛皮重量
@@ -35,21 +39,47 @@ void get_cup_weight()
 	Get_Maopi();//重新获取毛皮重量
 	
 	TIM4_Cmd(ENABLE);//TIM4使能
+	if(last_weight == 0)
+	{
+		System_Add_EventFifo(SYSTEM_EVENT_TIME_OUT);
+	}
 	
+}
+void time_add_des()
+{
+	if(SYSTEM_EVENT_REQ_UP == System_Event)
+	{
+	    user_timing ++ ;
+	}else{
+		if(user_timing>1){
+			user_timing -- ;
+		}
+	}
 }
 void time_out()
 {
 	TIM4_Cmd(DISABLE);//TIM4使能
     Get_Weight();
-	
-	if(Weight_Shiwu > 10)
+	if(last_weight != 0)
 	{
-
-		TIM4_Cmd(ENABLE);//TIM4使能
+	    if((last_weight - Weight_Shiwu) > 10)
+		{
+			
+		}else{
+			if(Weight_Shiwu == Weight_Maopi)
+			{
+				//air cup
+			}
+			// beep
+			
+		}
 	}else{
-	//beep led motor
 		
 	}
+
+	last_weight = Weight_Shiwu;
+	TIM4_Cmd(ENABLE);//TIM4使能
+	
 }
 void System_do_Down()
 {
@@ -80,13 +110,6 @@ SYSTEM_EVENT System_get_Event()
 	     return FifoPop(&System_event_fifo);
 	}
 
-//    for(;i<sizeof(rxData_event_Table)/sizeof(rxData_event_Table[0]);i++)
-//    {
-//        if(rxData_event_Table[i].req_id == System_DealData.pack.Flag)
-//		{ 
-//		    return rxData_event_Table[i].event;
-//		}
-//    }
 }
 void System_Check_EVENT_Fifo()
 {

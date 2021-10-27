@@ -137,6 +137,8 @@ INTERRUPT_HANDLER(EXTI1_IRQHandler, 9)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+	System_Add_EventFifo(SYSTEM_EVENT_CUP_WEIGHT);
+	
   EXTI_ClearITPendingBit (EXTI_IT_Pin1);
   GPIO_ToggleBits(GPIOD, GPIO_Pin_0);
 }
@@ -151,6 +153,16 @@ INTERRUPT_HANDLER(EXTI2_IRQHandler, 10)
     /* In order to detect unexpected events during development,
        it is recommended to set a breakpoint on the following instruction.
     */
+	
+	if(GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2))
+	{
+	    System_Add_EventFifo(SYSTEM_EVENT_REQ_UP);
+	}
+	if(GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2))
+	{
+		System_Add_EventFifo(SYSTEM_EVENT_REQ_DOWN);
+	}
+	EXTI_ClearITPendingBit (EXTI_IT_Pin2);
 }
 
 /**

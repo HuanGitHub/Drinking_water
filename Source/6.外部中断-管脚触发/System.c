@@ -5,6 +5,8 @@
 #include "fifo.h"
 #include "FSM.h"
 #include "HX711.h"
+#include "TM1650.h"
+#include "delay.h"
 #define EVENT_FIFO_SIZE    8
 #define MOTOR_TIME 5
 tFifo System_event_fifo;
@@ -19,7 +21,7 @@ void System_set_Event(SYSTEM_EVENT event);
 uint16_t System_time;
 SYSTEM_EVENT System_Event = SYSTEM_EVENT_NULL;
 FSM_t        System_fsm_t;
-u16	user_timing = 0;
+u8	user_timing = 0;
 FsmTable_t   s_System_FsmTable_t[]=
 {
 	/* event */			      /* CurState */        	/* (*eventActFun) */ 				/* NextState */
@@ -55,6 +57,7 @@ void time_add_des()
 			user_timing -- ;
 		}
 	}
+	TM1650_show_u8(user_timing);
 }
 void time_out()
 {

@@ -55,12 +55,12 @@ void main(void)
 	
 	CLK_PeripheralClockConfig (CLK_Peripheral_USART,ENABLE); //使能外设时钟
 	//以下2句为设置USART的TXD、RXD所在I/O口，板子上有CH340，已经带了硬件上拉，不设置也可以，如果不带CH340则应该设置
-    GPIO_Init(GPIOC, GPIO_Pin_3, GPIO_Mode_Out_PP_High_Fast);//TXD
-    GPIO_Init(GPIOC, GPIO_Pin_2, GPIO_Mode_In_PU_No_IT);//RXD
-	USART_Init(USART_BAUDRATE,USART_WordLength_8D,USART_StopBits_1,USART_Parity_No,USART_Mode_Tx);//USART初始化，9600，8N1
-	USART_ITConfig (USART_IT_RXNE,ENABLE);//使能接收中断，中断向量号28
-    USART_Cmd (ENABLE);//使能USART
-    printf("USART_Printf\r\n"); //发送字符串，末尾换行
+//    GPIO_Init(GPIOC, GPIO_Pin_3, GPIO_Mode_Out_PP_High_Fast);//TXD
+//    GPIO_Init(GPIOC, GPIO_Pin_2, GPIO_Mode_In_PU_No_IT);//RXD
+//	USART_Init(USART_BAUDRATE,USART_WordLength_8D,USART_StopBits_1,USART_Parity_No,USART_Mode_Tx);//USART初始化，9600，8N1
+//	USART_ITConfig (USART_IT_RXNE,ENABLE);//使能接收中断，中断向量号28
+//    USART_Cmd (ENABLE);//使能USART
+//    printf("USART_Printf\r\n"); //发送字符串，末尾换行
 	//KEY
     GPIO_Init(LED_GPIO_PORT, LED_GPIO_PINS, GPIO_Mode_Out_PP_Low_Slow);//初始化LED，GPD0低速推挽输出
     GPIO_Init(KEY_GPIO_PORT, KEY_GPIO_PINS, GPIO_Mode_In_PU_IT);//初始化按键，GPB1上拉输入

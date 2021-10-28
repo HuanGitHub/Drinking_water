@@ -1,26 +1,21 @@
  
 #ifndef __TM1650_I2C_H
 #define __TM1650_I2C_H
-#include "stm8s.h"
-#include "stm8s_gpio.h"
-#include "tim1.h"
-#include "usart2.h"
-#include <iostm8s103f3.h>
-#include <intrinsics.h>
- 
- 
-/**********************************
-TM1650芯片控制20路灯函数
-PB7为SCL口
-PB6为SDA口
-**********************************/
- 
-#define SCL_TM1650              PC_ODR_ODR7
-#define SDA_TM1650               PC_ODR_ODR6
-#define SDAM_TM1650              PC_IDR_IDR6
-#define SET_SCL_OUT_TM1650()    {PC_DDR_DDR7=1; PC_CR1_C17 = 1; PC_CR2_C27 = 0;}
-#define SET_SDA_OUT_TM1650()    {PC_DDR_DDR6=1; PC_CR1_C16 = 1; PC_CR2_C26 = 0;}
-#define SET_SDA_IN_TM1650()     {PC_DDR_DDR6=0; PC_CR1_C16 = 0; PC_CR2_C26 = 0;}
+#include "stm8l10x.h"
+
+#define TM1650_SCL_PORT   GPIOB
+#define TM1650_SCL_PIN    GPIO_Pin_3
+
+#define TM1650_SDA_PORT   GPIOB
+#define TM1650_SDA_PIN    GPIO_Pin_4
+
+
+#define SCL_TM1650(a) if(a){GPIO_SetBits(TM1650_SCL_PORT, TM1650_SCL_PIN);}else{GPIO_ResetBits(TM1650_SCL_PORT, TM1650_SCL_PIN);}//PA3
+#define SDA_TM1650(a) if(a){GPIO_SetBits(TM1650_SDA_PORT, TM1650_SDA_PIN);}else{GPIO_ResetBits(TM1650_SDA_PORT, TM1650_SDA_PIN);}//PA3
+#define SDAM_TM1650              GPIO_ReadInputDataBit(TM1650_SCL_PORT, TM1650_SCL_PIN)//PA2
+#define SET_SCL_OUT_TM1650()    {GPIO_Init(TM1650_SCL_PORT, TM1650_SCL_PIN, GPIO_Mode_Out_PP_High_Fast);}
+#define SET_SDA_OUT_TM1650()    {GPIO_Init(TM1650_SDA_PORT, TM1650_SDA_PIN, GPIO_Mode_Out_PP_High_Fast);}
+#define SET_SDA_IN_TM1650()     {GPIO_Init(TM1650_SDA_PORT, TM1650_SDA_PIN, GPIO_Mode_In_FL_No_IT);}
  
  
 void IIC_Init_TM1650(void);
@@ -35,5 +30,6 @@ void IIC_WrByte_TM1650(uint8_t txd);
 //u8 Scan_Key(void);
 void TM1650_Set(u8 add,u8 dat);
 void Init_Tm1650(void);
+void TM1650_show_u8(u8 num);
  
 #endif

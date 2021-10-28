@@ -2198,5 +2198,11 @@
         <file>
             <name>$PROJ_DIR$\System.h</name>
         </file>
+        <file>
+            <name>$PROJ_DIR$\TM1650.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\TM1650.h</name>
+        </file>
     </group>
 </project>

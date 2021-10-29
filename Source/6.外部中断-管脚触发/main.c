@@ -5,6 +5,7 @@
 #include "HX711.h"
 #include "delay.h"
 #include "stm8l10x_usart.h"
+#include "TM1650.h"
 //定义LED、按键接口
 #define LED_GPIO_PORT  GPIOD
 #define LED_GPIO_PINS  GPIO_Pin_0
@@ -82,6 +83,7 @@ void main(void)
 	delay_ms(1000);
 	delay_ms(1000);
 	Get_Maopi();//重新获取毛皮重量
+        Init_Tm1650();
 	
 
     enableInterrupts();//使能中断
